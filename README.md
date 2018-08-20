@@ -26,29 +26,27 @@ python3.5 gui.py
 ```
 
 
-## Installing pyinstaller on windows to compile binaries
+## Installing pyinstaller on Windows 7 and creating the executable
+Using Python 3.7 (installing pyqt5 form pip) or 3.4 (isntalling pyqt5 from executable) on Windows 10 did not work. 
+Python 3.7 yields terrible dependency errors from pyinstaller and with Python 3.4 after making the executable pyqt complains apparently because of windows 10. 
+The solution was to use a machine with Windows 7. 
 
-To use pyinstaller on windows it's better to use it with python 3.4 
-because there are unsolved dependency errors in later versions 
-Binary for python 3.4.2 (later versions don't have binaries): https://www.python.org/downloads/release/python-342/
-
-
-Then to install PyQt5 python 3.4 on windows you need to install it from the installer, 
-not form pip, as described here:
-https://stackoverflow.com/questions/22640640/how-to-install-pyqt4-on-windows-using-pip
-http://pyqt.sourceforge.net/Docs/PyQt5/installation.html
-https://sourceforge.net/projects/pyqt/
-
-Then the rest of the dependencies install without problems
+After installing Python 3.5.4 (https://www.python.org/downloads/release/python-354/), using the `Windows x86-64 executable installer`, these dependencies should install without problems:
 ```
+python -m pip install pyqt5
 python -m pip install pyserial
 python -m pip install opencv-python
 ```
-To compile a binary for some reason teh pyintaller people thought it made sense to use capital letters..
+To compile a binary for some reason the pyinstaller people thought it made sense to use capital letters..
 So you gotta write `PyInstaller` instead of `pyinstaller`...
 ```
 python -m PyInstaller --version
 python -m PyInstaller gui.py
+```
+Just doing `python -m PyInstaller gui.py` with Python 3.5 on windows 7 threw up some errors, the following line solved the issue.
+Desdribed here: https://stackoverflow.com/questions/51324754/python-3-6-x-pyinstaller-gives-error-no-module-named-pyqt5-sip
+```
+python -m PyInstaller -F gui.py --hidden-import PyQt5.sip
 ```
 
 
