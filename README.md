@@ -44,5 +44,12 @@ Then the rest of the dependencies install without problems
 python -m pip install pyserial
 python -m pip install opencv-python
 ```
+To compile a binary for some reason teh pyintaller people thought it made sense to use capital letters..
+So you gotta write `PyInstaller` instead of `pyinstaller`...
+```
+python -m PyInstaller --version
+python -m PyInstaller gui.py
+```
+
 
 To run: `python gui.py`
